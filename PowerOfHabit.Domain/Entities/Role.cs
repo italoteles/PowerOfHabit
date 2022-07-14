@@ -19,13 +19,18 @@ namespace PowerOfHabit.Domain.Entities
             ValidateDomain(RoleName);
         }
 
+        public void Update(string roleName)
+        {
+            ValidateDomain(RoleName);
+        }
+
         private void ValidateDomain(string roleName)
         {
             DomainExceptionValidation.When(string.IsNullOrEmpty(roleName), "Invalid Name. Name is required!");
 
             DomainExceptionValidation.When(roleName.Length < 3, "Invalid Name. Minimum 3 characters!");
 
-            RoleName = roleName.Trim();
+            RoleName = roleName;
 
         } 
         
