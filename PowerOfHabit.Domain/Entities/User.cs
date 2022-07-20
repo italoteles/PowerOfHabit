@@ -11,6 +11,8 @@ namespace PowerOfHabit.Domain.Entities
         public bool UserActived { get; private set; }
         public int RoleId { get; set; }
         public Role Role{ get; set; }
+        public ICollection<Entry> Entries { get; set; }
+
 
         public User(int userId, string userPassword,string userName, string userFullName, bool userActived)
         {
@@ -22,11 +24,18 @@ namespace PowerOfHabit.Domain.Entities
         {
             ValidateDomain(userPassword, userName, userFullName, userActived);
         }
+        public User(int userId, string userPassword, string userName, string userFullName, bool userActived, int roleId)
+        {
+            DomainExceptionValidation.When(userId < 0, "Invalid Id value");
+            UserId = userId;
+            ValidateDomain(userPassword, userName, userFullName, userActived);
+            RoleId = roleId;
+        }
 
-        public void Update(string userPassword, string userName, string userFullName, bool userActived, int roleID)
+        public void Update(string userPassword, string userName, string userFullName, bool userActived, int roleId)
         {
             ValidateDomain(userPassword, userName, userFullName, userActived);
-            RoleId = roleID;
+            RoleId = roleId;
         }
         public void ValidateDomain(string userPassword, string userName, string userFullName, bool userActived)
         {

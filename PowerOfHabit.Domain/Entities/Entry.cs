@@ -39,7 +39,7 @@ namespace PowerOfHabit.Domain.Entities
             DomainExceptionValidation.When(entryAmount == 0, "Amount has to be different from 0!");
             EntryDate = entryDate;
             EntryAmount = entryAmount;
-            EntryDateRegistration = entryDateRegistration;s
+            EntryDateRegistration = entryDateRegistration;
 
         }
     }

@@ -14,6 +14,9 @@ namespace PowerOfHabit.Infra.Data.EntitiesConfiguration
             builder.Property(p => p.UserPassword).HasMaxLength(6).IsRequired();
 
             builder.HasOne(e=>e.Role).WithMany(e=>e.Users).HasForeignKey(e=>e.RoleId);
+
+            builder.HasData(new User(1,"123","Admin","Administrador do Sistema",true,1));
+            
         }
     }
 }

@@ -9,6 +9,8 @@ namespace PowerOfHabit.Domain.Entities
         public string GroupDescription { get; private set; }
         public string GroupAmountUnit { get; private set; }
         public ICollection<User> Users { get; set; }
+        public ICollection<Entry> Entries { get; set; }
+
 
         public Group(int groupId, string groupName, string groupDescription, string groupAmountUnit)
         {
