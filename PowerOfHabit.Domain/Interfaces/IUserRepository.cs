@@ -5,6 +5,7 @@ namespace PowerOfHabit.Domain.Interfaces
     public interface IUserRepository
     {
         Task<IEnumerable<User>> GetAllAsync();
+        Task<User> GetRoleUser(int id);
         Task<User> GetByIdAsync(int? id);
         Task<User> CreateAsync(User user);
         Task<User> UpdateAsync(User user);
