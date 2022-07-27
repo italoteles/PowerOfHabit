@@ -12,4 +12,4 @@ namespace PowerOfHabit.Domain.Interfaces
         Task<User> DeleteAsync(User user);
     }
 }
-}
+
