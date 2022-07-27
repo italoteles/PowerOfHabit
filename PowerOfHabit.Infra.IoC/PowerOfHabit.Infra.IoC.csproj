@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
-    <PackageReference Include="MySql.EntityFrameworkCore" Version="6.0.4" />
   </ItemGroup>
 
   <ItemGroup>
