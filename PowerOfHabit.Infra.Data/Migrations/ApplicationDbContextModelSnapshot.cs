@@ -19,6 +19,21 @@ namespace PowerOfHabit.Infra.Data.Migrations
                 .HasAnnotation("ProductVersion", "6.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("GroupUser", b =>
+                {
+                    b.Property<int>("GroupsGroupId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsersUserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("GroupsGroupId", "UsersUserId");
+
+                    b.HasIndex("UsersUserId");
+
+                    b.ToTable("GroupUser");
+                });
+
             modelBuilder.Entity("PowerOfHabit.Domain.Entities.Entry", b =>
                 {
                     b.Property<int>("EntryId")
@@ -114,9 +129,6 @@ namespace PowerOfHabit.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("GroupId")
-                        .HasColumnType("int");
-
                     b.Property<int>("RoleId")
                         .HasColumnType("int");
 
@@ -139,8 +151,6 @@ namespace PowerOfHabit.Infra.Data.Migrations
 
                     b.HasKey("UserId");
 
-                    b.HasIndex("GroupId");
-
                     b.HasIndex("RoleId");
 
                     b.ToTable("Users");
@@ -155,6 +165,21 @@ namespace PowerOfHabit.Infra.Data.Migrations
                             UserName = "Admin",
                             UserPassword = "123"
                         });
+                });
+
+            modelBuilder.Entity("GroupUser", b =>
+                {
+                    b.HasOne("PowerOfHabit.Domain.Entities.Group", null)
+                        .WithMany()
+                        .HasForeignKey("GroupsGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PowerOfHabit.Domain.Entities.User", null)
+                        .WithMany()
+                        .HasForeignKey("UsersUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PowerOfHabit.Domain.Entities.Entry", b =>
@@ -178,10 +203,6 @@ namespace PowerOfHabit.Infra.Data.Migrations
 
             modelBuilder.Entity("PowerOfHabit.Domain.Entities.User", b =>
                 {
-                    b.HasOne("PowerOfHabit.Domain.Entities.Group", null)
-                        .WithMany("Users")
-                        .HasForeignKey("GroupId");
-
                     b.HasOne("PowerOfHabit.Domain.Entities.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
@@ -194,8 +215,6 @@ namespace PowerOfHabit.Infra.Data.Migrations
             modelBuilder.Entity("PowerOfHabit.Domain.Entities.Group", b =>
                 {
                     b.Navigation("Entries");
-
-                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("PowerOfHabit.Domain.Entities.Role", b =>

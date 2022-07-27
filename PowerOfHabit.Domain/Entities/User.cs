@@ -11,6 +11,7 @@ namespace PowerOfHabit.Domain.Entities
         public bool UserActived { get; private set; }
         public int RoleId { get; set; }
         public Role Role{ get; set; }
+        public ICollection<Group> Groups { get; set; }
         public ICollection<Entry> Entries { get; set; }
 
 

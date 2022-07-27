@@ -60,17 +60,11 @@ namespace PowerOfHabit.Infra.Data.Migrations
                     UserFullName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserActived = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    RoleId = table.Column<int>(type: "int", nullable: false),
-                    GroupId = table.Column<int>(type: "int", nullable: true)
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
-                    table.ForeignKey(
-                        name: "FK_Users_Groups_GroupId",
-                        column: x => x.GroupId,
-                        principalTable: "Groups",
-                        principalColumn: "GroupId");
                     table.ForeignKey(
                         name: "FK_Users_Roles_RoleId",
                         column: x => x.RoleId,
@@ -110,6 +104,31 @@ namespace PowerOfHabit.Infra.Data.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "GroupUser",
+                columns: table => new
+                {
+                    GroupsGroupId = table.Column<int>(type: "int", nullable: false),
+                    UsersUserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GroupUser", x => new { x.GroupsGroupId, x.UsersUserId });
+                    table.ForeignKey(
+                        name: "FK_GroupUser_Groups_GroupsGroupId",
+                        column: x => x.GroupsGroupId,
+                        principalTable: "Groups",
+                        principalColumn: "GroupId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GroupUser_Users_UsersUserId",
+                        column: x => x.UsersUserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "RoleId", "RoleName" },
@@ -127,8 +146,8 @@ namespace PowerOfHabit.Infra.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Users",
-                columns: new[] { "UserId", "GroupId", "RoleId", "UserActived", "UserFullName", "UserName", "UserPassword" },
-                values: new object[] { 1, null, 1, true, "Administrador do Sistema", "Admin", "123" });
+                columns: new[] { "UserId", "RoleId", "UserActived", "UserFullName", "UserName", "UserPassword" },
+                values: new object[] { 1, 1, true, "Administrador do Sistema", "Admin", "123" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Entries_GroupId",
@@ -141,9 +160,9 @@ namespace PowerOfHabit.Infra.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_GroupId",
-                table: "Users",
-                column: "GroupId");
+                name: "IX_GroupUser_UsersUserId",
+                table: "GroupUser",
+                column: "UsersUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleId",
@@ -157,10 +176,13 @@ namespace PowerOfHabit.Infra.Data.Migrations
                 name: "Entries");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "GroupUser");
 
             migrationBuilder.DropTable(
                 name: "Groups");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Roles");
