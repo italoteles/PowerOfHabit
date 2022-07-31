@@ -1,7 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using PowerOfHabit.Application.Interfaces;
+using PowerOfHabit.Application.Mappins;
+using PowerOfHabit.Application.Services;
 using PowerOfHabit.Domain.Interfaces;
 using PowerOfHabit.Infra.Data.Context;
 using PowerOfHabit.Infra.Data.Repositories;
@@ -23,7 +25,14 @@ namespace PowerOfHabit.Infra.IoC
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IGroupRepository, GroupRepository>();
             services.AddScoped<IEntryRepository, EntryRepository>();
-            
+
+            services.AddScoped<IRoleService,RoleService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IGroupService, GroupService>();
+            services.AddScoped<IEntryService, EntryService>();
+
+            services.AddScoped(typeof(DomainToDTOMappingProfile));
+
 
             return services;
         }
