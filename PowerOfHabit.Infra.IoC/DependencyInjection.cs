@@ -31,7 +31,7 @@ namespace PowerOfHabit.Infra.IoC
             services.AddScoped<IGroupService, GroupService>();
             services.AddScoped<IEntryService, EntryService>();
 
-            services.AddScoped(typeof(DomainToDTOMappingProfile));
+            services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 
 
             return services;
