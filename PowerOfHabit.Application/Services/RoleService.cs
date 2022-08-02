@@ -31,6 +31,7 @@ namespace PowerOfHabit.Application.Services
         {
             var roleEntity = _mapper.Map<Role>(roleDTO);
             await _roleRepository.CreateAsync(roleEntity);
+            roleDTO.RoleId = roleEntity.RoleId;
         }
         public async Task UpdateAsync(RoleDTO roleDTO)
         {
