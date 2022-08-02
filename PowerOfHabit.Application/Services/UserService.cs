@@ -32,6 +32,7 @@ namespace PowerOfHabit.Application.Services
         {
             var userEntity = _mapper.Map<User>(userDTO);
             await _userRepository.CreateAsync(userEntity);
+            userDTO.UserId = userEntity.UserId;
         }
 
         public async Task UpdateAsync(UserDTO userDTO)

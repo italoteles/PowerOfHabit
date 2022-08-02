@@ -31,6 +31,7 @@ namespace PowerOfHabit.Application.Services
         {
             var groupEntity = _mapper.Map<Group>(groupDTO);
             await _groupRepository.CreateAsync(groupEntity);
+            groupDTO.GroupId = groupEntity.GroupId;
         }
 
         public async Task DeleteAsync(int? id)

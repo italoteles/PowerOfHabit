@@ -33,6 +33,7 @@ namespace PowerOfHabit.Application.Services
         {
             var entryEntity = _mapper.Map<Entry>(entryDTO);
             await _entryRepository.CreateAsync(entryEntity);
+            entryDTO.EntryId = entryEntity.EntryId;
         }
 
         public async Task UpdateAsync(EntryDTO entryDTO)
