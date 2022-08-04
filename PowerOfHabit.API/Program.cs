@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 //using IgnoreCycles to avoid cycles in JSON properties
 builder.Services.AddControllers().AddJsonOptions(options =>
-    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+  options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 
 //extension method created in Infra.IoC

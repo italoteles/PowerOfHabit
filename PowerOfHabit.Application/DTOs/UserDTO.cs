@@ -1,4 +1,6 @@
-﻿namespace PowerOfHabit.Application.DTOs
+﻿using PowerOfHabit.Domain.Entities;
+
+namespace PowerOfHabit.Application.DTOs
 {
     public class UserDTO
     {
@@ -8,7 +10,10 @@
         public string UserFullName { get; set; }
         public bool UserActived { get; set; }
         public int RoleId { get; set; }
+        public RoleDTO Role { get; set; }
+        public ICollection<GroupDTO> Groups {get;set;}
 
-        
+
+
     }
 }

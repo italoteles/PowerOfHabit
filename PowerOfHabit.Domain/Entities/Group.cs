@@ -34,7 +34,7 @@ namespace PowerOfHabit.Domain.Entities
 
         public void ValidateDomain(string groupName, string groupDescription, string groupAmountUnit)
         {
-            DomainExceptionValidation.When(string.IsNullOrEmpty(groupName), "Invalid Name. User name is required!");
+            DomainExceptionValidation.When(string.IsNullOrEmpty(groupName), "Invalid Name. Group name is required!");
             GroupName = groupName;
             GroupDescription = groupDescription;
             GroupAmountUnit = groupAmountUnit;
