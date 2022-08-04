@@ -42,7 +42,7 @@ namespace PowerOfHabit.Infra.Data.Repositories
         public async Task<User> UpdateAsync(User user)
         {
 
-            //ICollection<Group> novaLista = null;
+            
             var userContext = await GetByIdAsync(user.UserId);
 
             foreach (var groupContext in userContext.Groups)
@@ -63,10 +63,26 @@ namespace PowerOfHabit.Infra.Data.Repositories
                 }
                 
             }
-            userContext.Groups = user.Groups;
 
-            //_userContext.Entry(userContext).State = EntityState.Modified;
-            //_userContext.Set<User>().Attach(userContext);
+            foreach (var group in user.Groups)
+            {
+                bool achou = false;
+                foreach (var groupContext in userContext.Groups)
+                {
+                    if (group.GroupId == groupContext.GroupId)
+                    {
+                        achou = true;
+                        break;
+                    }
+                }
+                if (!achou)
+                {
+                    userContext.Groups.Add(group);
+                }
+            }
+
+
+            
             await _userContext.SaveChangesAsync();
             return user;
         }
