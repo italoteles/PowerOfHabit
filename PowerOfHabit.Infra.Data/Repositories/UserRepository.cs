@@ -15,6 +15,11 @@ namespace PowerOfHabit.Infra.Data.Repositories
             _userContext = userContext;
         }
 
+        public async Task<User> Authenticate(string userName, string password)
+        {
+            return await _userContext.Users.SingleOrDefaultAsync(p => p.UserName == userName && p.UserPassword == password);
+        }
+
         public async Task<User> CreateAsync(User user)
         {
             _userContext.Add(user);

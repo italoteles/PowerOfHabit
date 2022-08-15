@@ -10,6 +10,8 @@ namespace PowerOfHabit.Domain.Interfaces
         Task<User> CreateAsync(User user);
         Task<User> UpdateAsync(User user);
         Task<User> DeleteAsync(User user);
+
+        Task<User> Authenticate(string userName, string password);
     }
 }
 
