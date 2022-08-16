@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PowerOfHabit.Application.DTOs;
 using PowerOfHabit.Application.Interfaces;
 
@@ -6,6 +7,7 @@ namespace PowerOfHabit.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class GroupsController : ControllerBase
     {
         private readonly IGroupService _groupService;

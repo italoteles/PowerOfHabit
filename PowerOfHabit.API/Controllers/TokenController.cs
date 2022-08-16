@@ -28,7 +28,7 @@ namespace PowerOfHabit.API.Controllers
 
             if (result)
             {
-                return GerateToken(userInfo);
+                return GenerateToken(userInfo);
             }
             else
             {
@@ -37,7 +37,7 @@ namespace PowerOfHabit.API.Controllers
             }
         }
 
-        private UserToken GerateToken(LoginModel userInfo)
+        private UserToken GenerateToken(LoginModel userInfo)
         {
             //user declarations 
             var claims = new[]
@@ -54,8 +54,8 @@ namespace PowerOfHabit.API.Controllers
 
             //token generation
             JwtSecurityToken token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Audience"],
+                issuer: _configuration["TokenConfiguration:Issuer"],
+                audience: _configuration["TokenConfiguration:Audience"],
                 claims: claims,
                 expires:expiration,
                 signingCredentials: credencials
